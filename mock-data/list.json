@@ -1,0 +1,29 @@
+{
+  "weddingList": [
+    {
+      "pagePic": "",
+      "title": "某婚礼",
+      "id": "11",
+      "price": 10000,
+      "hotel": [],
+      "category": ["唯美/清新", "户外/草坪", "概念/独特"],
+      "picItems": [
+        {
+          "picList": []
+        },
+        {
+          "picList": []
+        },
+        {
+          "picList": []
+        },
+        {
+          "picList": []
+        },
+        {
+          "picList": []
+        }
+      ]
+    }
+  ]
+}
