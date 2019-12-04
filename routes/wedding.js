@@ -1,6 +1,9 @@
 // 婚礼列表增删改查
 const WeddingModel = require("../mongoose/models/wedding");
-
+const fs = require("fs");
+const file = "./mock-data/wedding.json";
+const result = JSON.parse(fs.readFileSync(file));
+console.log(result);
 const add = async (ctx, next) => {
   const { pagePic, title, price, hotel, category, picItems } = ctx.request.body;
 

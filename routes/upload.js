@@ -4,7 +4,7 @@ const multer = require("koa-multer"); //加载koa-multer模块
 const storage = multer.diskStorage({
   //文件保存路径
   destination: function(req, file, cb) {
-    cb(null, "/home/hugh/public/img");
+    cb(null, "./");
   },
   //修改文件名称
   filename: function(req, file, cb) {
@@ -23,5 +23,5 @@ const upload = async (ctx, next) => {
 };
 
 module.exports = {
-  upload: [uploadConf.single("file"), upload]
+  "upload/file": [uploadConf.single("file"), upload]
 };
