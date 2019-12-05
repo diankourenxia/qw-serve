@@ -2,8 +2,7 @@
 const WeddingModel = require("../mongoose/models/wedding");
 const fs = require("fs");
 const file = "./mock-data/wedding.json";
-const result = JSON.parse(fs.readFileSync(file));
-console.log(result);
+const initialVal = JSON.parse(fs.readFileSync(file));
 const add = async (ctx, next) => {
   const { pagePic, title, price, hotel, category, picItems } = ctx.request.body;
 
@@ -40,27 +39,37 @@ const list = async (ctx, next) => {
     success: false,
     message: "获取失败"
   };
-  console.log(ctx);
   const {
-    status = "normal",
     priceRange = [0, 10000000],
     category = "",
     hotel = ""
   } = ctx.request.body;
   await new Promise((res, rej) => {
     let param = {
-      status
+      price: { $gte: priceRange[0] || 0, $lte: priceRange[1] || 10000000 }
     };
-    param = {
-      type,
-      status,
-      price: { $gte: priceRange[0] || 0, $lte: priceRange[1] || 10000000 },
-      category: { $all: category },
-      hotel: { $all: hotel }
-    };
-    WeddingModel.find((err, val) => {
+    if (category) {
+      param.category = { $all: category };
+    }
+    if (hotel) {
+      param.hotel = hotel;
+    }
+    console.log(param);
+    WeddingModel.find(param, (err, val) => {
       if (err) rej(err);
       console.log(val);
+      if (val.length === 0 || !!val === false) {
+        const newWedding = new WeddingModel(initialVal.weddingList[0]);
+        newWedding.save(function(err, resp) {
+          if (err) {
+            result = { success: false, message: "保存失败" };
+            rej(err);
+          } else {
+            result = { success: true, message: "保存成功" };
+            res();
+          }
+        });
+      }
       result = {
         success: true,
         data: val || []
@@ -73,6 +82,7 @@ const list = async (ctx, next) => {
       next();
     },
     err => {
+      console.log(err);
       result.message = err;
       ctx.body = result;
       next();
@@ -84,7 +94,7 @@ const get = async (ctx, next) => {
     success: false,
     message: "获取失败"
   };
-  const { _id } = ctx.request.query;
+  const { _id } = ctx.request.body;
   await new Promise((res, rej) => {
     WeddingModel.find({ _id: id }, (err, val) => {
       if (err) rej(err);
@@ -149,10 +159,13 @@ const deleteById = async (ctx, next) => {
     success: false,
     message: "获取失败"
   };
-  const { _id } = ctx.request.query;
+  console.log(ctx);
+  const { _id } = ctx.request.body;
+  console.log(_id);
   await new Promise((res, rej) => {
-    WeddingModel.remove({ _id: id }, (err, val) => {
+    WeddingModel.deleteOne({ _id: _id }, (err, val) => {
       if (err) rej(err);
+      console.log(res);
       result = {
         success: true,
         data: val || {}

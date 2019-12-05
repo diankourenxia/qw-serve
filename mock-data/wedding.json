@@ -1,27 +1,28 @@
 {
   "weddingList": [
     {
-      "pagePic": "",
+      "pagePic": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2915954782,925401670&fm=26&gp=0.jpg",
       "title": "某婚礼",
-      "id": "11",
-      "price": 10000,
-      "hotel": ["酒店a", "酒店b"],
+      "price": 88888,
+      "hotel": "酒店a",
+      "describe": "这是此次婚礼的描述",
       "category": ["唯美/清新", "户外/草坪", "概念/独特"],
       "picItems": [
         {
-          "picList": []
+          "picList": [
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2738531957,1019579643&fm=26&gp=0.jpg"
+          ]
         },
         {
-          "picList": []
+          "picList": [
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2738531957,1019579643&fm=26&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2141703075,2689212755&fm=26&gp=0.jpg"
+          ]
         },
         {
-          "picList": []
-        },
-        {
-          "picList": []
-        },
-        {
-          "picList": []
+          "picList": [
+            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=120602830,243648182&fm=26&gp=0.jpg"
+          ]
         }
       ]
     }

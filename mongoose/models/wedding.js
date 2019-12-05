@@ -3,7 +3,7 @@ const weddingSchema = new mongoose.Schema({
   pagePic: String,
   title: String,
   price: Number,
-  hotel: [String],
+  hotel: String,
   describe: String,
   category: [String],
   picItems: [

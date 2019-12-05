@@ -10,6 +10,13 @@ const bodyParser = require("koa-bodyparser");
   await initSchemas();
 })();
 const handler = async (ctx, next) => {
+  if (
+    ctx.response.body &&
+    ctx.response.body.hasOwnProperty("success") &&
+    ctx.response.body.success === true
+  ) {
+    ctx.response.body.code = "200";
+  }
   try {
     await next();
   } catch (err) {

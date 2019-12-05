@@ -1,39 +1,24 @@
 // 分类信息增删改差
 const CategoryModel = require("../mongoose/models/category");
+const fs = require("fs");
+const file = "./mock-data/category.json";
+const initialVal = JSON.parse(fs.readFileSync(file));
 const get = async (ctx, next) => {
-  newCategory = new CategoryModel({
-    categoryList: [
-      {
-        label: "价格",
-        list: [
-          "0/5000",
-          "5000/10000",
-          "10000/20000",
-          "20000/50000",
-          "50000/300000"
-        ]
-      },
-      {
-        label: "风格主题",
-        list: ["唯美/清新", "户外/草坪", "中式/宫廷", "森系/复古", "概念/独特"]
-      },
-      {
-        label: "婚礼酒店",
-        list: ["诺丁山", "某酒店", "七天", "雷迪森", "杏花村"]
-      }
-    ]
-  });
+  console.log(initialVal);
+  newCategory = new CategoryModel(initialVal);
   let result = {
     success: false,
     message: "获取失败"
   };
   await new Promise((res, rej) => {
-    // newCategory.save(function(err, resp) {
-    //   console.log(resp);
-    //   console.log(err);
-    // });
-    CategoryModel.find((err, val) => {
+    CategoryModel.find({}, (err, val) => {
       if (err) rej(err);
+      console.log(val);
+      if (val.length === 0 || !!val === false) {
+        newCategory.save(function(err, resp) {
+          console.log(resp);
+        });
+      }
       result = {
         success: true,
         data: val || {}
@@ -58,27 +43,14 @@ const update = async (ctx, next) => {
     success: false,
     message: "保存失败"
   };
-  const {
-    _id,
-    name,
-    describe,
-    timeRange,
-    qrCode,
-    phone,
-    address,
-    weibo
-  } = ctx.request.body;
+  const { _id, price, style, hotel } = ctx.request.body;
   await new Promise((res, rej) => {
     CategoryModel.update(
       { _id: _id },
       {
-        name,
-        describe,
-        timeRange,
-        qrCode,
-        phone,
-        address,
-        weibo
+        price,
+        style,
+        hotel
       },
       function(err, resp) {
         if (err) {
