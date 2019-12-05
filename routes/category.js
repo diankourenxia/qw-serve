@@ -13,17 +13,23 @@ const get = async (ctx, next) => {
   await new Promise((res, rej) => {
     CategoryModel.find({}, (err, val) => {
       if (err) rej(err);
-      console.log(val);
       if (val.length === 0 || !!val === false) {
         newCategory.save(function(err, resp) {
-          console.log(resp);
+          CategoryModel.find({}, (err, val) => {
+            result = {
+              success: true,
+              data: val || {}
+            };
+            res();
+          });
         });
+      } else {
+        result = {
+          success: true,
+          data: val || {}
+        };
+        res();
       }
-      result = {
-        success: true,
-        data: val || {}
-      };
-      res();
     });
   }).then(
     data => {
@@ -44,6 +50,7 @@ const update = async (ctx, next) => {
     message: "保存失败"
   };
   const { _id, price, style, hotel } = ctx.request.body;
+  console.log(ctx.request.body);
   await new Promise((res, rej) => {
     CategoryModel.update(
       { _id: _id },

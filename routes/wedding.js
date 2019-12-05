@@ -94,7 +94,7 @@ const get = async (ctx, next) => {
     success: false,
     message: "获取失败"
   };
-  const { _id } = ctx.request.body;
+  const { id } = ctx.request.body;
   await new Promise((res, rej) => {
     WeddingModel.find({ _id: id }, (err, val) => {
       if (err) rej(err);
@@ -124,6 +124,7 @@ const update = async (ctx, next) => {
   const {
     _id,
     pagePic,
+    describe,
     title,
     price,
     hotel,
@@ -133,7 +134,7 @@ const update = async (ctx, next) => {
   await new Promise((res, rej) => {
     WeddingModel.update(
       { _id: _id },
-      { pagePic, title, price, hotel, category, picItems },
+      { pagePic, title, price, hotel, describe, category, picItems },
       function(err, resp) {
         if (err) {
           result = { success: false, message: "保存失败" };

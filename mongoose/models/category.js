@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
 const CategorySchema = new mongoose.Schema({
-  category: {
-    price: {
-      label: String,
-      list: [String]
-    },
-    style: {
-      label: String,
-      list: [String]
-    },
-    hotel: {
-      label: String,
-      list: [String]
-    }
+  price: {
+    label: String,
+    list: [String]
+  },
+  style: {
+    label: String,
+    list: [String]
+  },
+  hotel: {
+    label: String,
+    list: [String]
   },
   createTime: {
     type: Date,
