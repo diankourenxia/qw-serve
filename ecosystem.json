@@ -18,7 +18,7 @@
       "port": "22",
       "ref": "origin/master",
       "repo": "git@github.com:diankourenxia/qw-serve.git",
-      "path": "/root/qw/",
+      "path": "/root/qw/source/qw-serve",
       "ssh_options": "StrictHostKeyChecking=no",
       "env": {
         "NODE_ENV": "production"
