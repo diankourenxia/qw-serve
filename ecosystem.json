@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "qw-serve",
+      "script": "index.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "hugh",
+      "host": ["49.235.7.76"],
+      "port": "22",
+      "ref": "origin/master",
+      "repo": "git@github.com:diankourenxia/qw-serve.git",
+      "path": "/root/qw",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "post-deploy": "npm install&&pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
