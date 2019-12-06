@@ -15,11 +15,10 @@ const storage = multer.diskStorage({
 //加载配置
 const uploadConf = multer({ storage: storage });
 const upload = async (ctx, next) => {
-  console.log(ctx.req.file);
-  console.log(ctx.req);
   ctx.body = {
+    code: "200",
     success: true,
-    location: `http://img.nghugh.cn/${ctx.req.file.filename}` //返回文件名
+    data: `http://img.nghugh.cn/${ctx.req.file.filename}` //返回文件名
   };
 };
 
