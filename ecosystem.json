@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "qw-serve",
-      "script": "index.js",
+      "script": "./index.js",
       "env": {
         "COMMON_VARIABLE": "true"
       },
