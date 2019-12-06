@@ -18,6 +18,7 @@ const upload = async (ctx, next) => {
   console.log(ctx.req.file);
   console.log(ctx.req);
   ctx.body = {
+    success: true,
     location: `http://img.nghugh.cn/${ctx.req.file.filename}` //返回文件名
   };
 };
