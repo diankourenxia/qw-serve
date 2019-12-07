@@ -18,7 +18,7 @@ const upload = async (ctx, next) => {
   ctx.body = {
     code: "200",
     success: true,
-    data: `http://img.nghugh.cn/${ctx.req.file.filename}` //返回文件名
+    data: `http://qwimg.nghugh.com/${ctx.req.file.filename}` //返回文件名
   };
 };
 
